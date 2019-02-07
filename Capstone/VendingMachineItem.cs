@@ -22,21 +22,21 @@ namespace Capstone
         public decimal Price { get; }
 
         /// <summary>
-        /// The item's remaining inventory.
+        /// The item's remaining count.
         /// </summary>
-        public int Inventory { get; private set; }
+        public int Count { get; private set; }
 
         /// <summary>
         /// The item's type.
         /// </summary>
         public string Type { get; }
 
-        public VendingMachineItem(string key, string name, decimal price, int inventory, string type)
+        public VendingMachineItem(string key, string name, decimal price, int count, string type)
         {
             this.Key = key;
             this.Name = name;
             this.Price = price;
-            this.Inventory = inventory;
+            this.Count = count;
             this.Type = type;
         }
     }

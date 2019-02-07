@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
+using System.Text;
 
 namespace Capstone
 {
-    public class InventoryReader
-    {        
-        static void Main()
+    public class VendingMachine
+    {
+        // Need private inventory dictionary
+        public Dictionary<string, VendingMachineItem> inventory { get; } = new Dictionary<string, VendingMachineItem>(); 
+
+        public void LoadInventory()
         {
             using (StreamReader sr = new StreamReader("vendingmachine.csv"))
             {
@@ -15,14 +18,12 @@ namespace Capstone
                 {
                     string rawItemDetails = sr.ReadLine();
                     string[] itemDetailsArray = rawItemDetails.Split('|');
-                    Dictionary<string, VendingMachineItem> itemDetailsDictionary = new Dictionary<string, VendingMachineItem>();
                     VendingMachineItem newItem = new VendingMachineItem(itemDetailsArray[0], itemDetailsArray[1], decimal.Parse(itemDetailsArray[2]), 5, itemDetailsArray[3]);
-                    itemDetailsDictionary.Add(itemDetailsArray[0], newItem);
+                    inventory.Add(itemDetailsArray[0], newItem);
                 }
             }
-
         }
-
-
+        // Needed methods: feed money, make purchase, list inventory, return change
+        //public void FeedMoney(decimal money);
     }
 }

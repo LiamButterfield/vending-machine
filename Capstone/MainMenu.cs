@@ -6,6 +6,14 @@ namespace Capstone
 {
     class MainMenu
     {
+        private VendingMachine vm = new VendingMachine();
+
+        // Create constructor
+        public MainMenu()
+        {
+            vm.LoadInventory();
+        }
+
         public void Run()
         {
             while (true)
@@ -21,10 +29,12 @@ namespace Capstone
                 if (choice == "1")
                 {
                     DisplayMenu displayMenu = new DisplayMenu();
+                    displayMenu.Run(vm.inventory);
                 }
                 else if (choice == "2")
                 {
-                    PurchaseMenu purchaseMenu = new PurchaseMenu();
+                    PurchaseMenu purchaseMenu = new PurchaseMenu(vm);
+                    //PurchaseMenu.run();
                 }
                 else if (choice == "3")
                 {

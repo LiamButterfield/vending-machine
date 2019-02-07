@@ -7,13 +7,19 @@ namespace Capstone
 {
     public class DisplayMenu
     {
-        public Dictionary<string, VendingMachineItem> ShowListOfItems()
+        public void Run(Dictionary<string, VendingMachineItem> inventory)
         {
-            using (StreamWriter sw = new StreamWriter(Console))
+            foreach (KeyValuePair<string, VendingMachineItem> kvp in inventory)
             {
-                sw.WriteLine()
+                string name = kvp.Value.Name;
+                int count = kvp.Value.Count;
+                Console.WriteLine(name + "|" + count);
             }
-
         }
+
+
+        // Dictionary name = inventory
+        // Display name & quantity remaining
+
     }
 }
