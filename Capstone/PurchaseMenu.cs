@@ -8,9 +8,49 @@ namespace Capstone
     {
         private VendingMachine vm;
 
+        private string moneyEntered;
+
+        public decimal MachineBalance;
+
         public PurchaseMenu(VendingMachine vm)
         {
             this.vm = vm;
         }
+        public void Run()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Please make a choice.");
+                Console.WriteLine("1. Feed Money.");
+                Console.WriteLine("2. Select Product.");
+                Console.WriteLine("3. Finish Transaction.");
+                Console.WriteLine($"Current Money Provided : {MachineBalance}");
+                string choice = Console.ReadLine();
+
+                if (choice == "1")
+                {
+                    vm.FeedMoney(moneyEntered);
+                    
+                }
+                else if (choice == "2")
+                {
+                    PurchaseMenu purchaseMenu = new PurchaseMenu(vm);
+                    purchaseMenu.Run();
+                }
+                else if (choice == "3")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid option.");
+                    Console.ReadLine();
+                }
+                Console.Clear();
+            }
+
+        }
+
     }
 }

@@ -7,6 +7,7 @@ namespace Capstone
     class MainMenu
     {
         private VendingMachine vm = new VendingMachine();
+        private string moneyEntered;
 
         // Create constructor
         public MainMenu()
@@ -34,7 +35,7 @@ namespace Capstone
                 else if (choice == "2")
                 {
                     PurchaseMenu purchaseMenu = new PurchaseMenu(vm);
-                    //PurchaseMenu.run();
+                    purchaseMenu.Run();
                 }
                 else if (choice == "3")
                 {
@@ -45,6 +46,7 @@ namespace Capstone
                     Console.WriteLine("Invalid option.");
                     Console.ReadLine();
                 }
+                Console.Clear();
             }
         }
     }
