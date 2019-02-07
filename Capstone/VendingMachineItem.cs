@@ -27,17 +27,17 @@ namespace Capstone
         public int Inventory { get; private set; }
 
         /// <summary>
-        /// The message displayed when the item is purchased.
+        /// The item's type.
         /// </summary>
-        public string Message { get; }
+        public string Type { get; }
 
-        public VendingMachineItem(string key, string name, decimal price, int inventory, string message)
+        public VendingMachineItem(string key, string name, decimal price, int inventory, string type)
         {
             this.Key = key;
             this.Name = name;
             this.Price = price;
             this.Inventory = inventory;
-            this.Message = message;
+            this.Type = type;
         }
     }
 }
