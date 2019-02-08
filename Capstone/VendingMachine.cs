@@ -6,8 +6,7 @@ using System.Text;
 namespace Capstone
 {
     public class VendingMachine
-    {
-        // Need private inventory dictionary
+    {        
         public Dictionary<string, VendingMachineItem> inventory { get; } = new Dictionary<string, VendingMachineItem>();
         public List<string> ProductsPurchased { get; set; } = new List<string>();
 
@@ -30,13 +29,7 @@ namespace Capstone
         }
         public void FeedMoney(string moneyEntered)
         {
-
-
-
-            //else
-            //{
-            //    Console.WriteLine("Please try again");
-            //}
+           
             decimal convertedMoney = 0.00M;
             try
             {
@@ -45,17 +38,16 @@ namespace Capstone
                     decimal covertedMoney = decimal.Parse(moneyEntered);
                     MachineBalance += covertedMoney;
                 }
-                // Open a StreamWriter to write to a file
+                
                 using (StreamWriter sw = new StreamWriter("logs.txt", true))
                 {
-                    sw.WriteLine($"{DateTime.Now.ToString()} FEED MONEY: {convertedMoney:C2} {MachineBalance:C2}");
+                    sw.WriteLine($"{DateTime.Now.ToString()} FEED MONEY: {convertedMoney:C2} {MachineBalance:C2}", -10);
                 }
             }
             catch (IOException ex)
             {
                 Console.WriteLine($"Error writing to log: {ex.Message}");
             }
-
         }
 
         public void SelectProduct(string productKeyEntered)
@@ -69,14 +61,15 @@ namespace Capstone
                     if (inventory[productKeyEntered].Count <= 0)
                     {
                         Console.WriteLine("This product is sold out.");
+                        Console.ReadLine();
                     }
                     else if (inventory[productKeyEntered].Price > MachineBalance)
                     {
                         Console.WriteLine("Insufficient funds.");
+                        Console.ReadLine();
                     }
                     else
-                    {
-                        // give product, update machineBalance, 
+                    {                        
                         inventory[productKeyEntered].Count -= 1;
                         MachineBalance -= inventory[productKeyEntered].Price;
                         ProductsPurchased.Add(inventory[productKeyEntered].Type);
@@ -85,25 +78,17 @@ namespace Capstone
                         Console.WriteLine("Product dispensing.");
                         using (StreamWriter sw = new StreamWriter("logs.txt", true))
                         {
-                            sw.WriteLine($"{DateTime.Now.ToString()} {inventory[productKeyEntered].Name} {productKeyEntered} {MachineBalance + inventory[productKeyEntered].Price:C2} {MachineBalance:C2}");
+                            sw.WriteLine($"{DateTime.Now.ToString()} {inventory[productKeyEntered].Name} {productKeyEntered} {MachineBalance + inventory[productKeyEntered].Price:C2} {MachineBalance:C2}", -10);
                         }
                     }
-                }
-                //else
-                //{
-                //    Console.WriteLine("This product code does not exist.");
-                //    Console.ReadLine();
-                //}
-                // Open a StreamWriter to write to a file
-
+                }                
             }
             catch (IOException ex)
             {
                 Console.WriteLine($"Error writing to log: {ex.Message}");
             }
-
         }
-         
+        
         public void FinishTransaction()
         {
             try
@@ -142,21 +127,16 @@ namespace Capstone
                 }
                 Console.WriteLine($"Your change is {quarters} quarters {dimes} dimes {nickels} nickels.");
                 Console.ReadLine();
-                // Open a StreamWriter to write to a file
+                
                 using (StreamWriter sw = new StreamWriter("logs.txt", true))
                 {
-                    sw.WriteLine($"{DateTime.Now.ToString()} GIVE CHANGE: {startingMachineBalance:C2} {MachineBalance:C2}");
+                    sw.WriteLine($"{DateTime.Now.ToString()} GIVE CHANGE: {startingMachineBalance:C2} {MachineBalance:C2}", -10);
                 }
             }
             catch (IOException ex)
             {
                 Console.WriteLine($"Error writing to log: {ex.Message}");
-            }
-            
-
-        }
-
-        // Needed methods: return change
-        //public void FeedMoney(decimal money);
+            }           
+        }       
     }
 }

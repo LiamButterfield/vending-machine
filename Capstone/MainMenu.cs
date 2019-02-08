@@ -9,8 +9,7 @@ namespace Capstone
         private VendingMachine vm = new VendingMachine();
         private string moneyEntered;
         public decimal MachineBalance;
-
-        // Create constructor
+       
         public MainMenu()
         {
             vm.LoadInventory();

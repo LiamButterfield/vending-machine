@@ -13,6 +13,10 @@ namespace Capstone
             {
                 string name = kvp.Value.Name;
                 int count = kvp.Value.Count;
+                if (count == 0)
+                {
+                    name = name + "  SOLD OUT";
+                }
                 Console.WriteLine(name + "|" + count);
             }
         }

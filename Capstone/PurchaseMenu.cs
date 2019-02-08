@@ -38,6 +38,8 @@ namespace Capstone
                 else if (choice == "3")
                 {
                     vm.FinishTransaction();
+                    Console.Clear();
+                    break;                    
                 }
                 else
                 {
@@ -45,31 +47,6 @@ namespace Capstone
                     Console.ReadLine();
                 }               
             }
-        }
-
-        //private void LogMessage(string choice)
-        //{
-        //    Dictionary<string, string> logTypes = new Dictionary<string, string>()
-        //    {
-        //        {"1", "FEED MONEY:" },
-        //        {"2", $"{productName} {productKeyEntered}"},
-        //        {"3", "GIVE CHANGE:" },
-
-        //    };
-        //    string vendingMachineAction = logTypes[choice];
-
-        //    try
-        //    {
-        //        // Open a StreamWriter to write to a file
-        //        using (StreamWriter sw = new StreamWriter("logs.txt", true))
-        //        {
-        //            sw.WriteLine($"{DateTime.Now.ToString()} {logTypes[choice]}");
-        //        }
-        //    }
-        //    catch (IOException ex)
-        //    {
-        //        Console.WriteLine($"Error writing to log: {ex.Message}");
-        //    }
-        //}
+        }    
     }
 }
