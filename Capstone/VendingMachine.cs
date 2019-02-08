@@ -102,19 +102,15 @@ namespace Capstone
                 nickels = Math.Truncate(MachineBalance / .05M);
                 MachineBalance = MachineBalance - (nickels * .05M);
             }
-            if (MachineBalance == 0.00M)
-            {
-                Console.WriteLine($"Your change is {quarters} quarters {dimes} dimes {nickels} nickels.");
-            }
 
-            foreach(string product in ProductsPurchased)
+            foreach (string product in ProductsPurchased)
             {
-                //ProductsPurchased.Add(inventory[productKeyEntered].Type);
-
                 Console.WriteLine(ProductMessage[product]);
             }
+            Console.WriteLine($"Your change is {quarters} quarters {dimes} dimes {nickels} nickels.");
+            Console.ReadLine();
         }
-        
+
         // Needed methods: return change
         //public void FeedMoney(decimal money);
     }
