@@ -24,7 +24,7 @@ namespace Capstone
         /// <summary>
         /// The item's remaining count.
         /// </summary>
-        public int Count { get; private set; }
+        public int Count { get; set; }
 
         /// <summary>
         /// The item's type.

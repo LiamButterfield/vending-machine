@@ -36,7 +36,7 @@ namespace Capstone
                 else if (choice == "2")
                 {
                     PurchaseMenu purchaseMenu = new PurchaseMenu();
-                    purchaseMenu.Run(MachineBalance);
+                    purchaseMenu.Run(vm);
                 }
                 else if (choice == "3")
                 {
@@ -47,12 +47,6 @@ namespace Capstone
                     Console.WriteLine("Invalid option.");
                     Console.ReadLine();
                 }
-<<<<<<< HEAD
-                // TODO remove
-                Console.Clear();
-=======
-                
->>>>>>> f0d71a964883b1030504f085fa220aec5ecb71dc
             }
         }
     }

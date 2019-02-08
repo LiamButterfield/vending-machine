@@ -28,8 +28,7 @@ namespace Capstone
         }
         public void FeedMoney(string moneyEntered)
         {
-            Console.WriteLine("Please insert cash.");
-            moneyEntered = Console.ReadLine();
+            
 
             if (moneyEntered == "1" || moneyEntered == "2" || moneyEntered == "5" || moneyEntered == "10")
             {
@@ -41,6 +40,34 @@ namespace Capstone
                 Console.WriteLine("Please try again");
             }
             
+        }
+
+        public void SelectProduct(string productKeyEntered)
+        {
+            bool containsKey = inventory.ContainsKey(productKeyEntered);
+            if (containsKey == true)
+            {
+                if (inventory[productKeyEntered].Count <= 0)
+                {
+                    Console.WriteLine("This product is sold out.");
+                }
+                else if (inventory[productKeyEntered].Price > MachineBalance)
+                {
+                    Console.WriteLine("Insufficient funds.");
+                }
+                else
+                {
+                    // give product, update machineBalance, 
+                    inventory[productKeyEntered].Count -= 1;
+                    MachineBalance -= inventory[productKeyEntered].Price;
+                    Console.WriteLine("Product dispensing.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("This product code does not exist.");
+                Console.ReadLine();
+            }
         }
                
         
