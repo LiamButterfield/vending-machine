@@ -8,6 +8,7 @@ namespace Capstone
     {
         private VendingMachine vm = new VendingMachine();
         private string moneyEntered;
+        public decimal MachineBalance;
 
         // Create constructor
         public MainMenu()
@@ -34,8 +35,8 @@ namespace Capstone
                 }
                 else if (choice == "2")
                 {
-                    PurchaseMenu purchaseMenu = new PurchaseMenu(vm);
-                    purchaseMenu.Run();
+                    PurchaseMenu purchaseMenu = new PurchaseMenu();
+                    purchaseMenu.Run(MachineBalance);
                 }
                 else if (choice == "3")
                 {
@@ -46,6 +47,7 @@ namespace Capstone
                     Console.WriteLine("Invalid option.");
                     Console.ReadLine();
                 }
+                // TODO remove
                 Console.Clear();
             }
         }

@@ -11,6 +11,7 @@ namespace Capstone
         public Dictionary<string, VendingMachineItem> inventory { get; } = new Dictionary<string, VendingMachineItem>();
 
         public decimal MachineBalance { get; private set; } = 0.00M;
+        public string moneyEntered { get; set; }
 
         public void LoadInventory()
         {

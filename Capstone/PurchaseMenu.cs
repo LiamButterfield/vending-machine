@@ -12,11 +12,7 @@ namespace Capstone
 
         public decimal MachineBalance;
 
-        public PurchaseMenu(VendingMachine vm)
-        {
-            this.vm = vm;
-        }
-        public void Run()
+        public void Run(decimal MachineBalance)
         {
             while (true)
             {
@@ -35,8 +31,8 @@ namespace Capstone
                 }
                 else if (choice == "2")
                 {
-                    PurchaseMenu purchaseMenu = new PurchaseMenu(vm);
-                    purchaseMenu.Run();
+                    PurchaseMenu purchaseMenu = new PurchaseMenu();
+                    purchaseMenu.Run(MachineBalance);
                 }
                 else if (choice == "3")
                 {
