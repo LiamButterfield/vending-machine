@@ -9,6 +9,8 @@ namespace Capstone
     {
         // Need private inventory dictionary
         public Dictionary<string, VendingMachineItem> inventory { get; } = new Dictionary<string, VendingMachineItem>();
+        public List<string> ProductsPurchased { get; set; } = new List<string>();
+
 
         public decimal MachineBalance { get; private set; } = 0.00M;
         public string moneyEntered { get; set; }
@@ -44,8 +46,6 @@ namespace Capstone
 
         public void SelectProduct(string productKeyEntered)
         {
-            List<string> productsPurchased = new List<string>();
-
             bool containsKey = inventory.ContainsKey(productKeyEntered);
             if (containsKey == true)
             {
@@ -62,7 +62,7 @@ namespace Capstone
                     // give product, update machineBalance, 
                     inventory[productKeyEntered].Count -= 1;
                     MachineBalance -= inventory[productKeyEntered].Price;
-                    productsPurchased.Add(inventory[productKeyEntered].Type);
+                    ProductsPurchased.Add(inventory[productKeyEntered].Type);
 
                     Console.WriteLine("Product dispensing.");
                 }
@@ -76,16 +76,43 @@ namespace Capstone
          
         public void FinishTransaction()
         {
-            int quarters = (int)MachineBalance / 25;
-            MachineBalance %= 25;
+            decimal quarters = 0;
+            decimal dimes = 0;
+            decimal nickels = 0;
+            Dictionary<string, string> ProductMessage = new Dictionary<string, string>()
+            {
+                {"Chip", "Crunch Crunch, Yum!" },
+                {"Candy", "Munch Munch, Yum!" },
+                {"Drink", "Glug Glug, Yum!" },
+                {"Gum", "Chew Chew, Yum!" }
+            };
 
-            int dimes = (int)MachineBalance / 10;
-            MachineBalance %= 10;
+            if (MachineBalance >= .25M)
+            {
+                quarters = Math.Truncate(MachineBalance / .25M);
+                MachineBalance = MachineBalance - (quarters * .25M);
+            }
+            if (MachineBalance >= .10M)
+            {
+                dimes = Math.Truncate(MachineBalance / .10M);
+                MachineBalance = MachineBalance - (dimes * .10M);
+            }
+            if (MachineBalance >= .05M)
+            {
+                nickels = Math.Truncate(MachineBalance / .05M);
+                MachineBalance = MachineBalance - (nickels * .05M);
+            }
+            if (MachineBalance == 0.00M)
+            {
+                Console.WriteLine($"Your change is {quarters} quarters {dimes} dimes {nickels} nickels.");
+            }
 
-            int nickels = (int)MachineBalance / 5;
-            MachineBalance %= 5;
+            foreach(string product in ProductsPurchased)
+            {
+                //ProductsPurchased.Add(inventory[productKeyEntered].Type);
 
-            Console.WriteLine($"Your change is {quarters} quarters {dimes} dimes {nickels} nickels.");
+                Console.WriteLine(ProductMessage[product]);
+            }
         }
         
         // Needed methods: return change
