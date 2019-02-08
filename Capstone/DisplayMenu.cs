@@ -16,10 +16,5 @@ namespace Capstone
                 Console.WriteLine(name + "|" + count);
             }
         }
-
-
-        // Dictionary name = inventory
-        // Display name & quantity remaining
-
     }
 }
