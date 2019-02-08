@@ -18,7 +18,7 @@ namespace Capstone
                 Console.WriteLine("1. Feed Money.");
                 Console.WriteLine("2. Select Product.");
                 Console.WriteLine("3. Finish Transaction.");
-                Console.WriteLine($"Current Money Provided : {vm.MachineBalance}");
+                Console.WriteLine($"Current Money Provided : $ {vm.MachineBalance}");
                 string choice = Console.ReadLine();
 
                 if (choice == "1")
@@ -35,7 +35,7 @@ namespace Capstone
                 }
                 else if (choice == "3")
                 {
-                    break;
+                    vm.FinishTransaction();
                 }
                 else
                 {

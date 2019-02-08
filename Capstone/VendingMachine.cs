@@ -44,6 +44,8 @@ namespace Capstone
 
         public void SelectProduct(string productKeyEntered)
         {
+            List<string> productsPurchased = new List<string>();
+
             bool containsKey = inventory.ContainsKey(productKeyEntered);
             if (containsKey == true)
             {
@@ -60,6 +62,8 @@ namespace Capstone
                     // give product, update machineBalance, 
                     inventory[productKeyEntered].Count -= 1;
                     MachineBalance -= inventory[productKeyEntered].Price;
+                    productsPurchased.Add(inventory[productKeyEntered].Type);
+
                     Console.WriteLine("Product dispensing.");
                 }
             }
@@ -69,9 +73,22 @@ namespace Capstone
                 Console.ReadLine();
             }
         }
-               
+         
+        public void FinishTransaction()
+        {
+            int quarters = (int)MachineBalance / 25;
+            MachineBalance %= 25;
+
+            int dimes = (int)MachineBalance / 10;
+            MachineBalance %= 10;
+
+            int nickels = (int)MachineBalance / 5;
+            MachineBalance %= 5;
+
+            Console.WriteLine($"Your change is {quarters} quarters {dimes} dimes {nickels} nickels.");
+        }
         
-        // Needed methods: feed money, make purchase, list inventory, return change
+        // Needed methods: return change
         //public void FeedMoney(decimal money);
     }
 }
