@@ -31,6 +31,14 @@ namespace Capstone
         /// </summary>
         public string Type { get; }
 
+        /// <summary>
+        /// Creates a vending machine item.
+        /// </summary>
+        /// <param name="key">Item's key.</param>
+        /// <param name="name">Item's name.</param>
+        /// <param name="price">Item's price.</param>
+        /// <param name="count">Item's count.</param>
+        /// <param name="type">Item's type.</param>
         public VendingMachineItem(string key, string name, decimal price, int count, string type)
         {
             this.Key = key;
