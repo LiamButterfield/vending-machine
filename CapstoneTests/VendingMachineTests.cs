@@ -24,10 +24,16 @@ namespace CapstoneTests
 
             Assert.AreEqual(0, vm.MachineBalance, "Amount is invalid, so MachineBalance doesn't update.");
         }
+       
         [TestMethod]
-        public void SelectProductTest_If_ProductCode_DoesNotExixt_Customer_IsReturnedTo_PurchaseMenu()
+        public void SelectProductTest_IfProductCode_DoesExist_AndThereAre_SufficentFunds()
         {
+            VendingMachine vm = new VendingMachine();
+            vm.FeedMoney ("5");
 
+            vm.SelectProduct("A2");
+
+            Assert.AreEqual(3.55 , vm., "Input is valid. MachineBalance should go down by the amount of the item selected.");
         }
     }
 }
