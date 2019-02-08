@@ -81,7 +81,12 @@ namespace Capstone
                             sw.WriteLine($"{DateTime.Now.ToString()} {inventory[productKeyEntered].Name} {productKeyEntered} {MachineBalance + inventory[productKeyEntered].Price:C2} {MachineBalance:C2}", -10);
                         }
                     }
-                }                
+                }
+                else
+                {
+                    Console.WriteLine("This code is invalid.");
+                    Console.ReadLine();
+                }
             }
             catch (IOException ex)
             {
