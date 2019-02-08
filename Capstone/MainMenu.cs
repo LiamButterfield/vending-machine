@@ -46,7 +46,7 @@ namespace Capstone
                     Console.WriteLine("Invalid option.");
                     Console.ReadLine();
                 }
-                Console.Clear();
+                
             }
         }
     }
