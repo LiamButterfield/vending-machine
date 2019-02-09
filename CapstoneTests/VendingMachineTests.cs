@@ -31,9 +31,9 @@ namespace CapstoneTests
             VendingMachine vm = new VendingMachine();
             vm.FeedMoney("5");
 
-            vm.SelectProduct("A2");
+            
 
-            Assert.AreEqual(3.55, vm.inventory , "Input is valid. MachineBalance should go down by the amount of the item selected.");
+            Assert.AreEqual(3.55, vm.MachineBalance , "Input is valid. MachineBalance should go down by the amount of the item selected.");
         }
         [TestMethod]
         public void SelectProductTest_IfProductIsSelected_ProductInventoryDecreasesByOne_MachineBalanceDecreases()
@@ -41,7 +41,7 @@ namespace CapstoneTests
             VendingMachine vm = new VendingMachine();
             vm.LoadInventory();
             vm.FeedMoney("5");
-            vm.SelectProduct("A2");
+            
 
             Assert.AreEqual(3.55M, vm.MachineBalance, "Product code exists and product inventory decreases by 1.");
             Assert.AreEqual(4, vm.inventory["A2"].Count, "Product code exists and product inventory decreases by 1.");
