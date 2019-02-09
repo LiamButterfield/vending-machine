@@ -5,12 +5,19 @@ using System.Text;
 
 namespace Capstone
 {
+    /// <summary>
+    /// Represents the purchase menu within the vending machine.
+    /// </summary>
     public class PurchaseMenu
     {
         private string moneyEntered;
         private string productKeyEntered;
         private string productName;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vm"></param>
         public void Run(VendingMachine vm)
         {
             while (true)

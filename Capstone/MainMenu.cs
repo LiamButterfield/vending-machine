@@ -4,21 +4,30 @@ using System.Text;
 
 namespace Capstone
 {
+    /// <summary>
+    /// Represents the main menu of the vending machine.
+    /// </summary>
     class MainMenu
     {
         private VendingMachine vm = new VendingMachine();
         private string moneyEntered;
         public decimal MachineBalance;
        
+        /// <summary>
+        /// Constructs the main menu
+        /// </summary>
         public MainMenu()
         {
             vm.LoadInventory();
         }
 
+        /// <summary>
+        /// Run an infinite loop until "break."
+        /// </summary>
         public void Run()
         {
             while (true)
-            {
+            {               
                 Console.WriteLine("Welcome to Vendo-Matic 500!");
                 Console.WriteLine("Please make a choice.");
                 Console.WriteLine("1. Display Vending Machine items.");

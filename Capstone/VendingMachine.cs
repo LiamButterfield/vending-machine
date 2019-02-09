@@ -5,15 +5,51 @@ using System.Text;
 
 namespace Capstone
 {
+    /// <summary>
+    /// Represents a vending machine.
+    /// </summary>
     public class VendingMachine
     {        
+        /// <summary>
+        /// A dictionary of current inventory within vending machine.
+        /// </summary>
         public Dictionary<string, VendingMachineItem> inventory { get; } = new Dictionary<string, VendingMachineItem>();
+
+        /// <summary>
+        /// A list of all products purchased.
+        /// </summary>
         public List<string> ProductsPurchased { get; set; } = new List<string>();
 
+        /// <summary>
+        /// Product message for each item in vending machine.
+        /// </summary>
+        public Dictionary<string, string> ProductMessage = new Dictionary<string, string>()
+            {
+                {"Chip", "Crunch Crunch, Yum!" },
+                {"Candy", "Munch Munch, Yum!" },
+                {"Drink", "Glug Glug, Yum!" },
+                {"Gum", "Chew Chew, Yum!" }
+            };
+        /// <summary>
+        /// Represents possible forms of change to return.
+        /// </summary>
+        public decimal quarters = 0;
+        public decimal dimes = 0;
+        public decimal nickels = 0;
 
+        /// <summary>
+        /// Current balance of vending machine (always starts at zero).
+        /// </summary>
         public decimal MachineBalance { get; private set; } = 0.00M;
+
+        /// <summary>
+        /// Amount of money entered into vending machine.
+        /// </summary>
         public string moneyEntered { get; set; }
 
+        /// <summary>
+        /// Loads inventory into vending machine.
+        /// </summary>
         public void LoadInventory()
         {
             using (StreamReader sr = new StreamReader("vendingmachine.csv"))
@@ -27,21 +63,29 @@ namespace Capstone
                 }
             }
         }
+        /// <summary>
+        /// Feeds money into vending machine
+        /// </summary>
+        /// <param name="moneyEntered">amount entered</param>
         public void FeedMoney(string moneyEntered)
-        {
-           
+        {           
             decimal convertedMoney = 0.00M;
+
             try
             {
                 if (moneyEntered == "1" || moneyEntered == "2" || moneyEntered == "5" || moneyEntered == "10")
                 {
                     decimal covertedMoney = decimal.Parse(moneyEntered);
                     MachineBalance += covertedMoney;
+                    using (StreamWriter sw = new StreamWriter("logs.txt", true))
+                    {
+                        sw.WriteLine($"{DateTime.Now.ToString()} FEED MONEY: {convertedMoney:C2} {MachineBalance:C2}", -10);
+                    }
                 }
-                
-                using (StreamWriter sw = new StreamWriter("logs.txt", true))
+                else
                 {
-                    sw.WriteLine($"{DateTime.Now.ToString()} FEED MONEY: {convertedMoney:C2} {MachineBalance:C2}", -10);
+                    Console.WriteLine("Please enter a valid amount (1, 2, 5, or 10).");
+                    Console.ReadLine();
                 }
             }
             catch (IOException ex)
@@ -49,7 +93,10 @@ namespace Capstone
                 Console.WriteLine($"Error writing to log: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Selects product from vending machine.
+        /// </summary>
+        /// <param name="productKeyEntered"></param>
         public void SelectProduct(string productKeyEntered)
         {
             bool containsKey = inventory.ContainsKey(productKeyEntered);
@@ -75,7 +122,6 @@ namespace Capstone
                         ProductsPurchased.Add(inventory[productKeyEntered].Type);
                         string productName = inventory[productKeyEntered].Name;
 
-                        Console.WriteLine("Product dispensing.");
                         using (StreamWriter sw = new StreamWriter("logs.txt", true))
                         {
                             sw.WriteLine($"{DateTime.Now.ToString()} {inventory[productKeyEntered].Name} {productKeyEntered} {MachineBalance + inventory[productKeyEntered].Price:C2} {MachineBalance:C2}", -10);
@@ -94,21 +140,15 @@ namespace Capstone
             }
         }
         
+        /// <summary>
+        /// Finishes transaction and despenses change.
+        /// </summary>
         public void FinishTransaction()
         {
             try
             {
-                decimal quarters = 0;
-                decimal dimes = 0;
-                decimal nickels = 0;
                 decimal startingMachineBalance = MachineBalance;
-                Dictionary<string, string> ProductMessage = new Dictionary<string, string>()
-            {
-                {"Chip", "Crunch Crunch, Yum!" },
-                {"Candy", "Munch Munch, Yum!" },
-                {"Drink", "Glug Glug, Yum!" },
-                {"Gum", "Chew Chew, Yum!" }
-            };
+
 
                 if (MachineBalance >= .25M)
                 {

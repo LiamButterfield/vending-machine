@@ -5,8 +5,15 @@ using System.IO;
 
 namespace Capstone
 {
+    /// <summary>
+    /// Represents the display menu.
+    /// </summary>
     public class DisplayMenu
     {
+        /// <summary>
+        /// Runs through dictionary to find the key and value of items in vending machine.
+        /// </summary>
+        /// <param name="inventory"></param>
         public void Run(Dictionary<string, VendingMachineItem> inventory)
         {
             foreach (KeyValuePair<string, VendingMachineItem> kvp in inventory)
